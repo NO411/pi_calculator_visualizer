@@ -1,5 +1,8 @@
 # pi_calculator_visualizer
 
+![screenshot1](https://raw.githubusercontent.com/NO411/pi_calculator_visualizer/master/resources/screenshots/screenshot1.png)
+![screenshot2](https://raw.githubusercontent.com/NO411/pi_calculator_visualizer/master/resources/screenshots/screenshot2.png)
+
 ## Installation
 
 You need Python3 to run this program.
