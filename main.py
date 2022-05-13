@@ -1,7 +1,6 @@
 from pyray import *
 from random import *
 
-
 def init():
 	set_trace_log_level(TraceLogLevel.LOG_NONE)
 	init_window(500, 500, "pi_calculator_visualizer")
@@ -32,7 +31,7 @@ def main():
 		start_timer += dtime
 		amount_increase_timer += dtime
 
-		if amount_increase_timer >= 1 and point_amount < 50:
+		if amount_increase_timer >= 1 and point_amount < 10000:
 			point_amount += 10
 			amount_increase_timer = 0
 
@@ -52,13 +51,18 @@ def main():
 
 		clear_background(WHITE)
 
-		for i in points:
-			scaled_point = Vector2(
-				i.x * scale_factor + coordinate_origin.x, i.y * scale_factor * -1 + coordinate_origin.y)
-			if check_collision_point_circle(i, Vector2(0, 0), 1):
-				draw_circle_sector(scaled_point, 2, 0, 360, 10, BLUE)
-			else:
-				draw_circle_sector(scaled_point, 2, 0, 360, 10, RED)
+		if len(points) < 10000: 
+			for i in points:
+				scaled_point = Vector2(
+					i.x * scale_factor + coordinate_origin.x, i.y * scale_factor * -1 + coordinate_origin.y)
+				if check_collision_point_circle(i, Vector2(0, 0), 1):
+					draw_circle_sector(scaled_point, 2, 0, 360, 10, BLUE)
+				else:
+					draw_circle_sector(scaled_point, 2, 0, 360, 10, RED)
+		else:
+			draw_rectangle_rec(Rectangle(coordinate_origin.x, coordinate_origin.y - scale_factor, scale_factor, scale_factor), RED)
+			draw_circle_sector(coordinate_origin, scale_factor, 180, 90, 100, BLUE)
+
 
 		draw_text_ex(font, "π = " + str(pi), Vector2(10, 10), 30, 0, BLACK)
 		draw_text_ex(font, "points = " + str(len(points)), Vector2(10, 50), 30, 0, BLACK)
@@ -70,14 +74,14 @@ def main():
 		draw_line_ex(Vector2(get_screen_width() - 10, coordinate_origin.y - 10), Vector2(get_screen_width(), coordinate_origin.y), 4, BLACK)
 		draw_line_ex(Vector2(get_screen_width() - 10, coordinate_origin.y + 10), Vector2(get_screen_width(), coordinate_origin.y), 4, BLACK)
 
-		draw_line_ex(Vector2(coordinate_origin.x, coordinate_origin.y - 1 * scale_factor), Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y - 1 * scale_factor), 4, RED)
-		draw_line_ex(Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y - 1 * scale_factor), Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y), 4, RED)
-		draw_ring(coordinate_origin, 1 * scale_factor - 1, 1 * scale_factor + 1, 0, 360, 100, BLUE)
+		draw_line_ex(Vector2(coordinate_origin.x, coordinate_origin.y - scale_factor), Vector2(coordinate_origin.x + scale_factor, coordinate_origin.y - scale_factor), 4, RED)
+		draw_line_ex(Vector2(coordinate_origin.x + scale_factor, coordinate_origin.y - scale_factor), Vector2(coordinate_origin.x + scale_factor, coordinate_origin.y), 4, RED)
+		draw_ring(coordinate_origin, scale_factor - 1, scale_factor + 1, 0, 360, 100, BLUE)
 
 		draw_text_ex(font, "0", Vector2(coordinate_origin.x - 15, coordinate_origin.y), 20, 0, BLACK)
-		draw_text_ex(font, "1", Vector2(coordinate_origin.x - 15, coordinate_origin.y - 1 * 300), 20, 0, BLACK)
-		draw_text_ex(font, "1", Vector2(coordinate_origin.x - 15 + 1 * 300, coordinate_origin.y), 20, 0, BLACK)
-
+		draw_text_ex(font, "1", Vector2(coordinate_origin.x - 15, coordinate_origin.y - 300), 20, 0, BLACK)
+		draw_text_ex(font, "1", Vector2(coordinate_origin.x - 15 + 300, coordinate_origin.y), 20, 0, BLACK)
+		draw_fps(get_screen_width() - 100, 0)
 		end_drawing()
 
 	close_window()
