@@ -62,13 +62,15 @@ def main():
 			coordinate_origin.x), get_screen_height(), BLACK)
 
 		draw_line_ex(Vector2(coordinate_origin.x, coordinate_origin.y - 1 * scale_factor),
-				  Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y - 1 * scale_factor), 2, RED)
+					 Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y - 1 * scale_factor), 2, RED)
 		draw_line_ex(Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y - 1 * scale_factor),
-				  Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y), 2, RED)
-		draw_ring(coordinate_origin, 1 * scale_factor - 1, 1 * scale_factor + 1, 0, 360, 100, BLUE)
+					 Vector2(coordinate_origin.x + 1 * scale_factor, coordinate_origin.y), 2, RED)
+		draw_ring(coordinate_origin, 1 * scale_factor - 1,
+				  1 * scale_factor + 1, 0, 360, 100, BLUE)
 
 		for i in points:
-			scaled_point = Vector2(i.x * scale_factor + coordinate_origin.x, i.y * scale_factor * -1 + coordinate_origin.y)
+			scaled_point = Vector2(
+				i.x * scale_factor + coordinate_origin.x, i.y * scale_factor * -1 + coordinate_origin.y)
 			if check_collision_point_circle(i, Vector2(0, 0), 1):
 				draw_circle_sector(scaled_point, 2, 0, 360, 10, BLUE)
 			else:
